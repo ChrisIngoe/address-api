@@ -38,7 +38,8 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "start-dev": "nodemon app.js",
     "test": "nyc  --reporter=html --reporter=text mocha test --recursive --timeout 10000 --exit",
     "test-enforce": "nyc  --reporter=html --reporter=text --check-coverage --statements 80 --functions 80 --lines 80 mocha test --recursive --timeout 10000 --exit",
     "prettier-format": "prettier --config .prettierrc.json --write app test",
