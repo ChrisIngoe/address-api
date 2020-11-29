@@ -7,7 +7,8 @@ const helmet = require('helmet'),
   healthcheck = require('./routes/healthcheck'),
   notFound = require('./routes/notFound'),
   address = require('./routes/address'),
-  cors = require('cors');
+  cors = require('cors'),
+  validate = require('./middleware/validate');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -21,7 +22,7 @@ app.use(cors());
 const path = '/';
 
 app.get(path + 'healthcheck', healthcheck.index);
-app.get(path + 'postcode/:postcode', address.postcodeSearch);
+app.get(path + 'postcode/:postcode', validate.validatePostcode, address.postcodeSearch);
 app.use(notFound.index);
 
 const server = http.createServer(app);

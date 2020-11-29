@@ -22,10 +22,10 @@ describe('Address API endpoint Integration Tests', function () {
         });
     });
   });
-  describe('#GET / invalidpostcode', function () {
+  describe('#GET / invalid', function () {
     it('should get Bad response and an error', function (done) {
       request(app)
-        .get('/postcode/invalidpostcode')
+        .get('/postcode/invalid')
         .expect(500)
         .end(function (err, res) {
           if (err) {
@@ -33,6 +33,21 @@ describe('Address API endpoint Integration Tests', function () {
           }
           expect(res.text).to.exist;
           expect(res.text).equals('Internal server error');
+          done();
+        });
+    });
+  });
+  describe('#GET / invalidparameter', function () {
+    it('should get Bad response and an error', function (done) {
+      request(app)
+        .get('/postcode/invalidparameter')
+        .expect(400)
+        .end(function (err, res) {
+          if (err) {
+            done(err);
+          }
+          expect(res.text).to.exist;
+          expect(res.text).equals('Bad request');
           done();
         });
     });
